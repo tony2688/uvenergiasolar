@@ -47,3 +47,10 @@ cache/
 # Package manager lock files (optional - some prefer to commit these)
 # package-lock.json
 # composer.lock
+
+# Large media files
+Assets/videos/
+Assets/uploads/*.mp4
+Assets/uploads/*.mov
+Assets/uploads/*.avi
+Assets/icons/"Nueva carpeta"/
