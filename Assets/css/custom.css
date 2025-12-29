@@ -1,0 +1,175 @@
+/* =========================================
+   1. VARIABLES Y CONFIGURACIÓN BASE
+   ========================================= */
+:root {
+  --color-primary: #16a34a;
+  /* green-600 */
+  --color-secondary: #facc15;
+  /* yellow-400 */
+  --color-dark: #111827;
+  /* gray-900 */
+  --transition-speed: 0.3s;
+}
+
+/* Scrollbar moderno (Webkit) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #15803d;
+  /* green-700 */
+}
+
+/* =========================================
+   2. UTILIDADES Y ANIMACIONES
+   ========================================= */
+
+/* Animación de entrada suave (Fade In) */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-fade-in-up {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Ajustes para inputs de calculadora */
+.form-input-calculadora {
+  transition: all 0.2s ease-in-out;
+}
+
+.form-input-calculadora:focus {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Etiquetas de unidad (W, h, d, u) dentro de los inputs */
+.unit-label {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  /* gray-400 */
+  font-size: 0.875rem;
+  pointer-events: none;
+}
+
+/* =========================================
+   3. ESTILOS DE IMPRESIÓN (PDF)
+   ========================================= */
+/* ¡ESTO ES LO MÁS IMPORTANTE PARA TU BOTÓN PDF! */
+
+@media print {
+
+  /* Ocultar elementos innecesarios en el papel */
+  header,
+  footer,
+  #btnCalcular,
+  #btnDescargarPDF,
+  #toggleDarkMode,
+  #mobileMenuBtn,
+  #faqContainer,
+  /* Opcional: Ocultar preguntas frecuentes en el PDF */
+  .no-print {
+    display: none !important;
+  }
+
+  /* Forzar fondo blanco y texto negro para ahorrar tinta */
+  body,
+  section,
+  main,
+  div {
+    background-color: white !important;
+    color: black !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  /* Asegurar que los resultados sean visibles */
+  #resultados {
+    display: block !important;
+    opacity: 1 !important;
+    page-break-inside: avoid;
+  }
+
+  /* Ajustar el gráfico para que entre en la hoja */
+  canvas {
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: 400px;
+  }
+
+  /* Agregar un encabezado de cotización solo para impresión */
+  body::before {
+    content: "UV Energía Solar - Cotización Estimada";
+    display: block;
+    font-size: 24pt;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #16a34a !important;
+    /* Permitimos color en el título */
+  }
+
+  body::after {
+    content: "Contacto: 3865-586322 | www.uvenergiasolar.com.ar";
+    display: block;
+    font-size: 10pt;
+    text-align: center;
+    margin-top: 30px;
+    color: #666 !important;
+  }
+}
+
+/* =========================================
+   4. COMPONENTES ESPECÍFICOS
+   ========================================= */
+
+/* Estilos extra para SweetAlert en modo oscuro */
+.dark .swal2-popup {
+  background: #1f2937;
+  color: #f3f4f6;
+}
+
+.dark .swal2-title,
+.dark .swal2-content {
+  color: #f3f4f6 !important;
+}
+
+/* Corrección para selectores en modo oscuro */
+select option {
+  background-color: white;
+  color: black;
+}
+
+.dark select option {
+  background-color: #374151;
+  color: white;
+}

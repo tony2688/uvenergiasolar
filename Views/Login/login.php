@@ -1,70 +1,96 @@
 <?php
-// Carga del header utilizando la función headerAdmin y pasando los datos correspondientes
+// Carga del header (que ya abre el HTML, HEAD y MAIN)
 headerAdmin($data);
 ?>
 
-<!-- Sección principal centrada vertical y horizontalmente, con fondo oscuro en modo dark -->
-<section class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-[oklch(0.623_0.214_259.815)] dark:bg-gray-900">
+<section
+  class="min-h-[calc(100vh-60px)] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
 
-  <!-- Contenedor del formulario con estilos para modo claro y oscuro -->
-  <div class="max-w-md w-full bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md">
+  <div
+    class="max-w-md w-full bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
 
-    <!-- Título del formulario -->
-    <h2 class="text-center text-2xl font-bold text-gray-800 dark:text-white mb-6">Iniciar Sesión</h2>
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white">
+        ¡Bienvenido de nuevo!
+      </h2>
+      <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+        Ingresá tus credenciales para acceder al panel.
+      </p>
+    </div>
 
-    <!-- Formulario de inicio de sesión -->
-    <form id="formLogin" class="space-y-4">
+    <form id="formLogin" class="space-y-6">
 
-      <!-- Campo de correo electrónico -->
       <div>
-        <label for="txtEmail" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Correo electrónico</label>
-        <input type="email" name="txtEmail" id="txtEmail" required
-          class="mt-1 block w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-white focus:ring-primary focus:border-primary">
+        <label for="txtEmail" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Correo
+          electrónico</label>
+        <div class="mt-1 relative rounded-md shadow-sm">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <i class="fas fa-envelope text-gray-400"></i>
+          </div>
+          <input type="email" name="txtEmail" id="txtEmail" required placeholder="nombre@ejemplo.com"
+            class="block w-full pl-10 pr-3 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white focus:ring-green-500 focus:border-green-500 transition-colors sm:text-sm">
+        </div>
       </div>
 
-      <!-- Campo de contraseña -->
       <div>
         <label for="txtPassword" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Contraseña</label>
-        <input type="password" name="txtPassword" id="txtPassword" required
-          class="mt-1 block w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-white focus:ring-primary focus:border-primary">
+        <div class="mt-1 relative rounded-md shadow-sm">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <i class="fas fa-lock text-gray-400"></i>
+          </div>
+          <input type="password" name="txtPassword" id="txtPassword" required placeholder="••••••••"
+            class="block w-full pl-10 pr-3 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white focus:ring-green-500 focus:border-green-500 transition-colors sm:text-sm">
+        </div>
       </div>
 
-      <!-- Recordarme y enlace para recuperar contraseña -->
-      <div class="flex items-center justify-between text-sm">
-        <label class="flex items-center text-gray-700 dark:text-gray-300">
-          <input type="checkbox" class="mr-2"> Recordarme
-        </label>
-        <a href="#" class="text-primary hover:underline">¿Olvidaste tu contraseña?</a>
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
+          <input id="recordarme" name="recordarme" type="checkbox"
+            class="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded cursor-pointer">
+          <label for="recordarme" class="ml-2 block text-sm text-gray-700 dark:text-gray-300 cursor-pointer">
+            Recordarme
+          </label>
+        </div>
+
+        <div class="text-sm">
+          <a href="#"
+            class="font-medium text-green-600 hover:text-green-500 dark:text-green-400 dark:hover:text-green-300 transition-colors">
+            ¿Olvidaste tu contraseña?
+          </a>
+        </div>
       </div>
 
-      <!-- Botón de envío -->
-      <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white py-2 rounded-md shadow">
-        Ingresar
-      </button>
+      <div>
+        <button type="submit"
+          class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all transform hover:scale-[1.02]">
+          INGRESAR
+        </button>
+      </div>
 
     </form>
 
-    <!-- Enlace para registrarse si no tiene cuenta -->
-    <div class="text-center mt-4">
-      <p>¿No tenés cuenta?
-        <a href="<?php echo base_url(); ?>usuarios/registro" class="text-green-500 hover:underline">Registrate</a>
+    <div class="mt-8 text-center border-t border-gray-200 dark:border-gray-700 pt-6">
+      <p class="text-sm text-gray-600 dark:text-gray-400">
+        ¿Aún no tenés una cuenta?
+        <a href="<?php echo base_url(); ?>usuarios/registro"
+          class="font-bold text-green-600 hover:text-green-500 dark:text-green-400 transition-colors">
+          Crear cuenta gratis
+        </a>
       </p>
     </div>
+
   </div>
 </section>
 
-<!-- Variable global base_url disponible para JS -->
 <script>
   const base_url = "<?php echo base_url(); ?>";
 </script>
 
-<!-- Script de validación del login -->
 <script src="<?php echo base_url(); ?>Assets/js/login.js"></script>
 
-<!-- Librería SweetAlert2 para notificaciones -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <?php
-// Carga del footer utilizando la función footerAdmin
+// Carga del footer (cierra MAIN, BODY y HTML)
 footerAdmin($data);
 ?>

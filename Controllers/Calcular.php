@@ -14,11 +14,16 @@ class Calcular extends Controllers
     public function home()
     {
         // Asignación de valores a los datos que se pasarán a la vista
-        $data['page_id'] = 10; // ID de la página
-        $data['page_tag'] = "Calculadora Solar"; // Etiqueta de la página
-        $data['page_title'] = "Calculadora de Energía Solar"; // Título de la página
-        $data['page_name'] = "calculadora"; // Nombre de la página
-        $data['page_content'] = "Calculá fácilmente tu consumo energético y dimensioná tu sistema solar."; // Contenido descriptivo de la página
+        $data['page_id'] = 10;
+        $data['page_tag'] = "Calculadora Solar";
+        $data['page_title'] = "Calculadora de Energía Solar | UV Energía Solar";
+        $data['page_name'] = "calculadora";
+
+        // MEJORA SEO: Descripción específica para esta página
+        $data['page_description'] = "Calculá gratis tu consumo eléctrico y descubrí cuántos paneles solares necesitás para tu hogar o empresa en Argentina.";
+
+        // Contenido adicional si lo usas en la vista
+        $data['page_content'] = "Calculá fácilmente tu consumo energético y dimensioná tu sistema solar.";
 
         // Carga la vista "Calcular/calcular" pasando los datos a la vista
         $this->views->getView($this, "Calcular/calcular", $data);

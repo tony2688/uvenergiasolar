@@ -14,13 +14,18 @@ class Home extends Controllers
     public function home()
     {
         // Asigna datos a un array para pasar a la vista
-        $data['page_id'] = 1; // ID de la página (en este caso 1)
-        $data['page_tag'] = "Home"; // Etiqueta de la página (en este caso "Home")
-        $data['page_title'] = "Pagina principal"; // Título de la página
-        $data['page_name'] = "home"; // Nombre de la página
-        $data['page_content'] = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut quo consectetur ab corrupti quia sint reprehenderit repellat qui culpa, tempora minus porro neque quidem vel necessitatibus blanditiis id temporibus cupiditate?;"; // Contenido de la página (texto de ejemplo)
+        $data['page_id'] = 1;
+        $data['page_tag'] = "Home";
+        $data['page_title'] = "UV Energía Solar | Soluciones Sustentables en Tucumán";
+        $data['page_name'] = "home";
+
+        // MEJORA SEO: Descripción profesional para la portada
+        $data['page_description'] = "Líderes en energía solar en Tucumán y Argentina. Venta e instalación de paneles solares, termotanques y soluciones de eficiencia energética para hogares y empresas.";
+
+        // Texto corregido (Adiós Lorem Ipsum)
+        $data['page_content'] = "Bienvenido a UV Energía Solar, tu aliado en la transición hacia un futuro energético sustentable.";
 
         // Carga la vista 'home' y pasa los datos previamente definidos
-        $this->views->getView($this, "home", $data); // Muestra la vista 'home' con los datos asignados
+        $this->views->getView($this, "home", $data);
     }
 }

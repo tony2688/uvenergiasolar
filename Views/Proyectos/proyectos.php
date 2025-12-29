@@ -1,121 +1,162 @@
-<?php
-// Llamada a la función que carga el header del administrador con los datos necesarios
-headerAdmin($data);
-?>
+<?php headerAdmin($data); ?>
 
-<!-- =======================================
-              HERO SECTION
-======================================= -->
-
-<!-- Sección hero con video de fondo, texto centrado y superposición oscura -->
-<section class="relative w-full min-h-[70vh] flex items-center justify-center text-white text-center px-6 pt-32 md:pt-40 overflow-hidden">
-  <!-- Video de fondo en distintos formatos -->
-  <video class="absolute inset-0 w-full h-full object-cover z-0" autoplay loop muted playsinline>
+<div class="bg-gray-900 pt-32 pb-16 relative overflow-hidden">
+  <video class="absolute inset-0 w-full h-full object-cover opacity-40" autoplay loop muted playsinline>
     <source src="<?php echo BASE_URL; ?>Assets/videos/solar.mov" type="video/quicktime">
     <source src="<?php echo BASE_URL; ?>Assets/videos/video1.mp4" type="video/mp4">
-    <!-- Imagen de respaldo si no carga el video -->
-    <img src="<?php echo BASE_URL; ?>Assets/images/uploads/nosotros.png" alt="Energía Solar" class="w-full h-full object-cover">
   </video>
 
-  <!-- Capa negra con opacidad -->
-  <div class="absolute inset-0 bg-black/60 z-0"></div>
+  <div class="absolute inset-0 bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-gray-50 dark:to-gray-900"></div>
 
-  <!-- Contenido central encima del video -->
-  <div class="relative z-10 max-w-4xl animate-on-scroll text-white text-center">
-    <!-- Título principal -->
-    <h2 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight drop-shadow-xl">
-      <span class="text-white">Nuestros</span>
-      <span class="text-green-500">Proyectos</span>
-    </h2>
-
-    <!-- Subtítulo -->
-    <p class="text-lg md:text-2xl text-white/90 font-medium leading-relaxed px-4">
-      Conocé algunos de nuestros <span class="text-yellow-400 font-semibold">trabajos reales</span> instalados en
-      <span class="text-yellow-400 font-semibold">hogares</span>, <span class="text-yellow-400 font-semibold">comercios</span> e
-      <span class="text-yellow-400 font-semibold">industrias</span>. Diseños <span class="text-yellow-400 font-semibold">personalizados</span>,
-      <span class="text-yellow-400 font-semibold">ahorro garantizado</span>, y energías <span class="text-yellow-400 font-semibold">limpias</span> al alcance de todos.
+  <div class="container mx-auto px-4 relative z-10 text-center">
+    <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 animate-fade-in drop-shadow-lg">
+      Nuestros <span class="text-green-500">Proyectos</span>
+    </h1>
+    <p class="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto animate-fade-in-up font-light leading-relaxed">
+      Explorá nuestra galería de instalaciones reales. Desde hogares hasta industrias,
+      llevamos <span class="text-yellow-400 font-semibold">energía limpia y ahorro</span> a todo Tucumán.
     </p>
   </div>
-</section>
+</div>
 
-<!-- =====================================
-GALERÍA DE PROYECTOS
-======================================= -->
+<section class="py-16 bg-gray-50 dark:bg-gray-900 min-h-screen">
+  <div class="container mx-auto px-4 max-w-7xl">
 
-<!-- Galería que muestra los proyectos en tarjetas -->
-<section id="proyectos" class="bg-gray-100 py-20">
-  <div class="max-w-7xl mx-auto px-6">
-
-    <!-- Grid de tarjetas -->
-    <div class="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
       <?php
-      // Arreglos con imágenes, títulos y descripciones de los proyectos
-      $imagenes = ['imagen5.jpg', 'imagen8.jpg', 'imagen7.jpg', 'imagen9.jpg', 'imagen22.jpg', 'imagen11.jpg', 'imagen12.jpg', 'imagen19.jpg', 'imagen21.jpg'];
-      $titulos = ['Residencial - Concepcion', 'Residencial - Cadillal', 'Residencial - Tucumán', 'Residencial - Monteros', 'Rural - El Mollar', 'Rural - Banda del Río Sali', 'Rural - Aguilares', 'Residencial - El Mollar', 'Residencial - Los Nogales'];
-      $descripciones = ['Sistema de 5kW para una vivienda unifamiliar.', 'Instalación de 12kW en local gastronómico.', 'Planta solar para industria textil de 25kW.', 'Sistema de respaldo para zonas rurales.', 'Inversores trifásicos conectados a red.', 'Autonomía energética para fábrica.', 'Instalación familiar con baterías.', 'Paneles para riego agrícola.', 'Edificio alimentado 100% con solar.'];
+      // Obtenemos los proyectos desde el controlador
+      $proyectos = isset($data['proyectos_list']) ? $data['proyectos_list'] : [];
 
-      // Bucle para mostrar cada proyecto
-      for ($i = 0; $i < count($imagenes); $i++): ?>
+      foreach ($proyectos as $index => $proyecto):
+        // Ruta de la imagen
+        $imgSrc = BASE_URL . "Assets/images/uploads/" . $proyecto['img'];
+        ?>
 
-        <!-- Tarjeta individual del proyecto -->
-        <div class="bg-white rounded-xl shadow-md overflow-hidden">
-          <!-- Imagen del proyecto con zoom en hover -->
-          <img src="<?= BASE_URL ?>Assets/images/uploads/<?= $imagenes[$i]; ?>"
-            alt="<?= $titulos[$i]; ?>"
-            class="w-full h-[260px] object-cover object-center hover:scale-105 transition duration-300 cursor-pointer"
-            onclick="openModal('modal-<?= $i ?>')" />
+        <article
+          class="group bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-700 flex flex-col h-full animate-fade-in">
 
-          <!-- Contenido textual -->
-          <div class="p-4">
-            <h3 class="text-xl font-semibold text-gray-800"><?= $titulos[$i]; ?></h3>
-            <p class="text-gray-600 text-sm"><?= $descripciones[$i]; ?></p>
-          </div>
-        </div>
+          <div class="relative h-64 overflow-hidden cursor-pointer" onclick="abrirModal(<?php echo $index; ?>)">
+            <img src="<?php echo $imgSrc; ?>" alt="<?php echo $proyecto['titulo']; ?>" loading="lazy"
+              class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700">
 
-        <!-- Modal personalizado con Tailwind CSS -->
-        <div id="modal-<?= $i ?>" class="modal fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden z-50">
-          <div class="bg-white p-6 rounded-lg max-w-4xl w-full">
-            <div class="flex justify-between items-center mb-4">
-              <h5 class="text-xl font-semibold text-center w-full"><?= $titulos[$i]; ?></h5> <!-- Título centrado -->
-              <button onclick="closeModal('modal-<?= $i ?>')" class="text-gray-600 hover:text-gray-900">
-                <span class="text-rojo">X</span>
-              </button>
+            <div
+              class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <i class="fas fa-search-plus text-white text-3xl"></i>
             </div>
 
-            <!-- Imagen ajustada al 50% del contenedor -->
-            <div class="flex justify-center mb-4">
-              <img src="<?= BASE_URL ?>Assets/images/uploads/<?= $imagenes[$i]; ?>" alt="<?= $titulos[$i]; ?>" class="w-1/2 h-auto object-cover" />
-            </div>
-
-            <!-- Descripción centrada debajo de la imagen -->
-            <p class="text-gray-600 text-center"><?= $descripciones[$i]; ?></p> <!-- Descripción centrada -->
+            <span
+              class="absolute top-4 right-4 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm">
+              <?php echo $proyecto['categoria']; ?>
+            </span>
           </div>
-        </div>
 
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2 group-hover:text-green-600 transition-colors">
+              <?php echo $proyecto['titulo']; ?>
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed flex-grow">
+              <?php echo $proyecto['desc']; ?>
+            </p>
 
-      <?php endfor; ?>
+            <button onclick="abrirModal(<?php echo $index; ?>)"
+              class="mt-4 text-green-600 dark:text-green-400 font-semibold text-sm hover:underline self-start">
+              Ver detalle &rarr;
+            </button>
+          </div>
+
+          <dialog id="modal-<?php echo $index; ?>"
+            class="modal-proyecto fixed inset-0 z-50 w-full h-full bg-transparent p-0 m-0 hidden">
+            <div class="fixed inset-0 bg-black/90 backdrop-blur-sm transition-opacity"
+              onclick="cerrarModal(<?php echo $index; ?>)"></div>
+
+            <div class="relative z-50 m-auto flex flex-col items-center justify-center h-full p-4 pointer-events-none">
+              <div
+                class="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-2xl max-w-4xl w-full pointer-events-auto transform scale-95 transition-transform duration-300">
+
+                <div class="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-700">
+                  <h4 class="text-lg font-bold text-gray-800 dark:text-white">
+                    <?php echo $proyecto['titulo']; ?>
+                  </h4>
+                  <button onclick="cerrarModal(<?php echo $index; ?>)"
+                    class="text-gray-500 hover:text-red-500 transition text-2xl font-bold focus:outline-none px-2">
+                    &times;
+                  </button>
+                </div>
+
+                <div class="bg-black flex justify-center items-center bg-pattern">
+                  <img src="<?php echo $imgSrc; ?>" alt="<?php echo $proyecto['titulo']; ?>"
+                    class="max-h-[60vh] w-auto object-contain">
+                </div>
+
+                <div class="p-6 bg-white dark:bg-gray-800">
+                  <p class="text-gray-700 dark:text-gray-300 text-center text-lg">
+                    <?php echo $proyecto['desc']; ?>
+                  </p>
+                  <div class="mt-6 text-center">
+                    <a href="https://wa.me/5493865586322?text=Me%20interesa%20el%20proyecto:%20<?php echo urlencode($proyecto['titulo']); ?>"
+                      target="_blank"
+                      class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-full font-bold transition">
+                      <i class="fab fa-whatsapp"></i> Consultar por este proyecto
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </dialog>
+
+        </article>
+      <?php endforeach; ?>
 
     </div>
+
+    <div class="mt-16 text-center">
+      <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">¿Tenés un proyecto en mente?</h3>
+      <a href="<?php echo BASE_URL; ?>contacto"
+        class="inline-block px-8 py-4 bg-gray-900 dark:bg-green-600 text-white text-lg font-bold rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+        Solicitar Cotización Gratuita
+      </a>
+    </div>
+
   </div>
 </section>
 
-<!-- =====================================
-            CTA FINAL (Botón de WhatsApp)
-======================================= -->
+<script>
+  function abrirModal(index) {
+    const modal = document.getElementById(`modal-${index}`);
+    if (modal) {
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden'; // Evitar scroll de fondo
 
-<!-- Botón centrado para contacto por WhatsApp -->
-<div class="max-w-7xl mx-auto px-6 mt-12 text-center">
-  <a href="https://wa.me/5493865586322?text=Hola,%20quiero%20un%20presupuesto%20para%20un%20proyecto%20solar"
-    target="_blank"
-    class="inline-block px-8 py-4 bg-green-600 text-white text-lg font-semibold rounded-full hover:bg-green-700 transition">
-    Solicitar presupuesto por WhatsApp →
-  </a>
-</div>
+      // Animación de entrada
+      setTimeout(() => {
+        const content = modal.querySelector('div.transform'); // Buscamos el contenedor interno
+        if (content) {
+          content.classList.remove('scale-95', 'opacity-0');
+          content.classList.add('scale-100', 'opacity-100');
+        }
+      }, 10);
+    }
+  }
 
-<br>
+  function cerrarModal(index) {
+    const modal = document.getElementById(`modal-${index}`);
+    if (modal) {
+      document.body.style.overflow = ''; // Restaurar scroll
+      modal.classList.add('hidden');
+    }
+  }
 
-<?php
-// Llamada al footer de administrador para cerrar el HTML
-footerAdmin($data);
-?>
+  // Cerrar con tecla ESC
+  document.addEventListener('keydown', function (event) {
+    if (event.key === "Escape") {
+      const modales = document.querySelectorAll('.modal-proyecto:not(.hidden)');
+      modales.forEach(m => {
+        m.classList.add('hidden');
+        document.body.style.overflow = '';
+      });
+    }
+  });
+</script>
+
+<?php footerAdmin($data); ?>
