@@ -3,31 +3,32 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Definir la URL base para el proyecto
-// DESARROLLO LOCAL (Laragon)
-const BASE_URL = "http://localhost/uvenergiasolar/";
+// Detectar entorno (producción vs desarrollo)
+$isProduction = isset($_SERVER['HTTP_HOST']) &&
+    (strpos($_SERVER['HTTP_HOST'], 'hostinger') !== false ||
+        strpos($_SERVER['HTTP_HOST'], 'uvenergiasolar.com') !== false);
 
-// PRODUCCIÓN (Hostinger) - Descomentar para producción
-// const BASE_URL = "https://www.uvenergiasolar.com.ar/";
+if ($isProduction) {
+    // ⚠️ PRODUCCIÓN - Cargar configuración desde archivo local (NO en Git)
+    $localConfig = __DIR__ . '/Config.local.php';
+    if (file_exists($localConfig)) {
+        require_once $localConfig;
+    } else {
+        die('Error: Archivo de configuración de producción no encontrado. 
+             Por favor crea Config/Config.local.php en el servidor.');
+    }
+} else {
+    // ✅ DESARROLLO LOCAL (Laragon)
+    define('BASE_URL', "http://localhost/uvenergiasolar/");
+    define('DB_HOST', "localhost");
+    define('DB_NAME', "uvenergiasolar");
+    define('DB_USER', "root");
+    define('DB_PASSWORD', "");
+    define('DB_CHARSET', 'utf8');
+}
 
 // Establecer la zona horaria por defecto para Argentina (Tucumán)
 date_default_timezone_set('America/Argentina/Tucuman');
-
-// Datos de conexión a la base de datos
-// DESARROLLO LOCAL (Laragon)
-const DB_HOST = "localhost";
-const DB_NAME = "uvenergiasolar";
-const DB_USER = "root";
-const DB_PASSWORD = "";
-const DB_CHARSET = 'utf8';
-
-// PRODUCCIÓN (Hostinger) - Descomentar para producción
-// const DB_HOST = "localhost";
-// const DB_NAME = "c2162521_uvsolar";
-// const DB_USER = "c2162521_uvsolar";
-// const DB_PASSWORD = "83neteGIfa";
-// const DB_CHARSET = 'utf8';
-
 
 // Delimitadores y moneda
 const SPD = ","; // Separador decimal

@@ -54,3 +54,10 @@ Assets/uploads/*.mp4
 Assets/uploads/*.mov
 Assets/uploads/*.avi
 Assets/icons/"Nueva carpeta"/
+
+# 🔒 ARCHIVOS DE CONFIGURACIÓN SENSIBLES (NO SUBIR A GIT)
+Config/Config.local.php
+Config/*.local.php
+.env
+.env.local
+.env.production
