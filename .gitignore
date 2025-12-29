@@ -1,0 +1,49 @@
+# Dependencies
+node_modules/
+vendor/
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+error_log
+debug.log
+
+# Environment files (if you add any in the future)
+.env
+.env.local
+.env.*.local
+
+# Build files
+dist/
+build/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Desktop.ini
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Cache files
+*.cache
+cache/
+
+# Package manager lock files (optional - some prefer to commit these)
+# package-lock.json
+# composer.lock
